@@ -1,0 +1,161 @@
+<h1>Page{{pageName}}</h1>
+<!--si isloading est vrai cad affiche le loading-->
+<app-loading *ngIf="isLoading"/>
+
+<app-pagination
+     *ngIf="datas.length"
+     [current]=" result.current"
+     [allCount]="result.allCount"
+     [next]="result.next"
+     [previous]="result.previous"
+     [pageLimit]="pageLimit"
+     (pageSelected)="setPage($event)"
+
+    ></app-pagination>
+
+
+
+
+<app-search-form
+*ngIf="datas.length || query"
+    [name]="entityNames[0]"
+   (newValue)="searchData($event)"
+    />
+    <div *ngIf="query"></div>
+     Resultat de recherche avec e mot clé: <strong>{{searchTag}}</strong>
+
+<div *ngIf="!isLoading">
+<!--comme c'est un objet je prfère mettre un filtre json-->
+<p>{{datas | json}}</p>
+  <div class="table-container" *ngIf="result?.allCount" >
+    <!--Nombre de donnees recupérées-->
+    <p *ngIf="result?.allCount > 1">
+      <strong>{{result?.allCount}}</strong>données retrouvées
+    </p>
+    <p *ngIf="result?.allCount === 1">
+      <strong>{{result?.allCount}}</strong>donnée retrouvée
+    </p>
+
+    <div class="d-flex gap-2 py-2 justify-content-end relative">
+      <button class="btn btn-success">
+        <i class="fa fa-plus"></i>
+        Add New
+      </button>
+      <button class="btn btn-success" (click)="setDisplaySelectionBox()">
+        <i class="fa-solid fa-layer-group"></i>
+      </button>
+
+     <div class="entityNames absolute shadow p-2" *ngIf="displaySelectionBox">
+      <ul>
+        <li *ngFor="Let entityName of entityNamesAll; Let first= first">
+          <input
+          class="form-check-input"
+          type="checkbox"
+          [checked]="first || entityNames.includes(entityName)"
+          [disabled]="first"
+          (change)="setEntityNames($event,entityName)"
+          name="" id="">
+          {{entityName|formatName}}
+        </li>
+
+      </ul>
+     </div>
+    </div>
+
+
+    <table class="table shadow table-responsive" *ngIf="datas?.length">
+  <thead>
+    <tr>
+      <th scope="col">
+        <input class= "form-check-input" type="checkbox" name="" id="">
+      </th>
+      <th scope="col">N°</th>
+      <th scope="col" *ngFor="let name of entityNames ">{{name |formatName}}</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of datas; let index =index">
+      <td scope="row">
+        <input class= "form-check-input" type="checkbox" name="" id="">
+      </td>
+      <td scope="row">{{result?.allCount -((result.current -1)*pageLimit)- index}}</td>
+      <td *ngFor="let name of entityNames">
+        <div [innerHTML]="getValue(data, name) | formatTag:searchTag"></div>
+      </td>
+      <td>
+        <a href="" class="btn btn-success m-1">
+          <i class="fa-solid fa-eye"></i>
+        </a>
+        <a href="" class="btn btn-primary m-1">
+          <i class="fa-solid fa-edit"></i>
+        </a>
+        <a href="" class="btn btn-danger m-1">
+          <i class="fa-solid fa-trash"></i>
+        </a>
+      </td>
+    </tr>
+
+  </tbody>
+    </table>
+
+      <div class="d-flex justify-content-end">
+        <div class="item-par-page">
+            Item per page
+            <select name="pageLimit" id="pageLimit" (change)="setPageLimit($event)">
+              <option value="">5</option>
+              <option value="">10</option>
+              <option value="">15</option>
+              <option value="">20</option>
+              <option value="">25</option>
+            </select>
+        </div>
+      </div>
+
+    <app-pagination
+    [current]=" result.current"
+    [allCount]="result.allCount"
+    [next]="result.next"
+    [previous]="result.previous"
+    [pageLimit]="pageLimit"
+    (pageSelected)="setPage($event)"
+
+   ></app-pagination>
+
+   <p *ngIf="result?.allCount > 1">
+    <strong>{{result?.allCount}}</strong>données retrouvées
+  </p>
+  <p *ngIf="result?.allCount === 1">
+    <strong>{{result?.allCount}}</strong>donnée retrouvée
+  </p>
+
+  </div>
+
+   <div *ngIf="!datas?.length && !query" class="empty-box shadow">
+      <p>
+        Aucune donnée disponible
+     </p>
+     <a  class="btn btn-success" routerLink="add">
+        <i class=" fa fa-plus"></i>
+        Ajouter
+     </a>
+    </div>
+</div>
+
+<!--Donc il faut importer l'url fontawesome du site fontawesome cdn et copier le premier lien url et le mettre dans
+style.css
+
+* les bouttons de l'oeil (visualisation) de la mise à jour, de la suppressions
+
+
+
+
+Lorseque je détécte cet évenement j'appelle la méthode "setPage"
+(pageSelected)="setPage($event)"
+($event) = j'aurai des informations qui m'ont été envoyé
+
+{result?.allCount -((result.current -1)*pageLimit)- index => Pour retirer les informations et
+les élements de la page précédente
+
+
+-->

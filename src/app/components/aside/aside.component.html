@@ -1,0 +1,15 @@
+
+<aside>
+<ul>
+  <li *ngFor="let route of routes">
+   <a [routerLink]="[route.path]" routerLinkActive="active">{{route.name}}</a>
+  </li>
+  <!--<li><a routerLink="/category">Categories</a></li>
+  <li><a routerLink="/user">Clients</a></li>
+  <li><a routerLink="/order">Orders</a></li>
+  <li><a routerLink="/contact">Contacts</a></li>-->
+
+</ul>
+</aside>
+
+

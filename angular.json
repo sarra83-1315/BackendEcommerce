@@ -25,9 +25,15 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
+
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "src/assets/css/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -43,7 +49,14 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+
+              "fileReplacements": [
+          {
+            "replace": "src/environments/environment.ts",
+            "with": "src/environments/environment.prod.ts"
+          }
+        ]
             },
             "development": {
               "buildOptimizer": false,
@@ -51,7 +64,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -94,5 +113,24 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "d7a3ad8b-52ad-4ef4-bca5-e80b0b235b76"
   }
 }
+
+// Pour installer bootstrap "npm i bootstrap" et pour intégration du bootstrap je dois faire les configuartion au niveau
+//de Angular.json donc on va au node_modules apres bootstrap apres dist apres css apres boostrap.min.css avec clique droit sur
+//boostrap.min.css copy relative path et on va copier et mettre dans les styles aussi la meme chose pour  le bootsrap .min.js qu'on va copier
+//dans le script
+//ensuite on install jquery et apres pour le popper on sur bootsrap  puis doc puis clique et"accéder au fichier" puis l'enregistrer ensuite le copier dans assets/css puis ouvrir et faire copy
+//relative path et le mettre dans le script dans angular.json
+
+// Remarque a chaque fois qu'on modifie ou on ajoute dans angular.json il faut stopper et redémarer le serveur*/
+
+
+/*
+// pour faire aussi les configuration de l'environement on a génerer un environement avec la commande
+//" ng generate environement " puis on a ajoute un urlApi: localhost:3000 du backend apres on a fait les modification sur
+// la partie configuration(developement, production) avec les remplacement ramener du site "generate env angular" dependant
+//aussi de des deux fichiers (developement, prod)*/
