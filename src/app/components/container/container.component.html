@@ -17,12 +17,15 @@
 
 
 <app-search-form
-*ngIf="datas.length || query"
+    *ngIf="datas.length || query"
     [name]="entityNames[0]"
+
    (newValue)="searchData($event)"
     />
-    <div *ngIf="query"></div>
-     Resultat de recherche avec e mot clé: <strong>{{searchTag}}</strong>
+    <div *ngIf="query">
+      Resultat de recherche avec mot clé: <strong>{{searchTag}}</strong>
+    </div>
+
 
 <div *ngIf="!isLoading">
 <!--comme c'est un objet je prfère mettre un filtre json-->
@@ -47,14 +50,15 @@
 
      <div class="entityNames absolute shadow p-2" *ngIf="displaySelectionBox">
       <ul>
-        <li *ngFor="Let entityName of entityNamesAll; Let first= first">
+        <li *ngFor="let entityName of entityNamesAll; let first= first">
           <input
           class="form-check-input"
           type="checkbox"
           [checked]="first || entityNames.includes(entityName)"
           [disabled]="first"
           (change)="setEntityNames($event,entityName)"
-          name="" id="">
+          name=""
+           id="">
           {{entityName|formatName}}
         </li>
 
@@ -101,7 +105,7 @@
 
       <div class="d-flex justify-content-end">
         <div class="item-par-page">
-            Item per page
+            Item par page
             <select name="pageLimit" id="pageLimit" (change)="setPageLimit($event)">
               <option value="">5</option>
               <option value="">10</option>
@@ -157,5 +161,6 @@ Lorseque je détécte cet évenement j'appelle la méthode "setPage"
 {result?.allCount -((result.current -1)*pageLimit)- index => Pour retirer les informations et
 les élements de la page précédente
 
+!query= hhjjhjgj cad qquelque chose qui n'existe pas
 
 -->

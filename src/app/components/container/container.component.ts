@@ -24,7 +24,7 @@ export class ContainerComponent {
   routes :Array<any> = routes
   query:string= ""
   searchTag: string=""
-  displaySelectionBox= Boolean= false;
+  displaySelectionBox:Boolean= false;
  constructor(private route:ActivatedRoute, private entityService: EntityService){
 
  }
@@ -114,14 +114,15 @@ setPageLimit(event:any){
 
 
 }
+//Les données qui nous seront envoyé
 searchData(data:any){
   this.query=""
   if(data){
      //searchTag est le mot de clé de recherche"den"
     this.searchTag= data.value
-    this.query+= data.name+ "="+ data.value
-    //Sur console on aura query: 'name= cvfdgg'
-  }else
+    this.query += data.name +"="+ data.value
+    //Sur console on aura query: 'name= cvfdgg ou subject=jean'
+  }
   //console.log({query});
   this.getDatasByPage()
 }
@@ -186,6 +187,7 @@ setEntityNames(event:any, name:string){
  const {checked}= event.target
 if(checked){
   //c'est dans entityNames qu'on souhaite maitre les champs a afficher
+  //si name est dans entityName c'est plus intéressant cad qu'il est déja dans dans le tableau es la description et son contenu
  if (!this.entityNames.includes(name)){
     this.entityNames.push(name)
  }
@@ -193,7 +195,7 @@ if(checked){
 }else{
  this.entityNames= this.entityNames.filter((entityName:string)=>entityName!==name )
 }
-console.log{{checked, name}}
+//console.log({checked, name})
 }
 }
 

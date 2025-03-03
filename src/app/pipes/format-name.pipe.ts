@@ -22,7 +22,7 @@ export class FormatNamePipe implements PipeTransform {
     if(value === "isSpecialOffer"){
       return "Special Offer"
     }
-    //test_merci split est pour découpé
+    //  la valeur qui en parametre il nous l'on donné test_merci split est pour découpé
      let newValueArray:any= value.split("_")
      //map est pour parcourir le tableau
      //["test", "merci"]

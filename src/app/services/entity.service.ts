@@ -25,7 +25,7 @@ export class EntityService {
   }
   searchDatasByPage(entityName: string, query:string, pageNumber:Number=1, pageLimit:Number=5){
     //récupérer les données de product ou contact ou etc.....
-    //query le champ spécifier sur lequel on filtre
+    //query c'est la recherche suivant le champ spécifier sur lequel on filtre
     return this.http.get(environment.apiUrl+entityName+"/search?"+query+"&pageNumber="+pageNumber+"&pageLimit="+pageLimit)
     //et tt ca va retourner un observable qu'on va observer et réagir en fct de valeur qu'on va recevoir
 
