@@ -19,6 +19,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { FormatValuePipe } from './pipes/format-value.pipe';
 import { ImagePreviewComponent } from './components/image-preview/image-preview.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
