@@ -16,6 +16,8 @@ import { SearchFormComponent } from './components/search-form/search-form.compon
 import { FormsModule } from '@angular/forms';
 import { FormatTagPipe } from './pipes/format-tag.pipe';
 import { AppRoutingModule } from './app.routing.module';
+import { FormatValuePipe } from './pipes/format-value.pipe';
+import { ImagePreviewComponent } from './components/image-preview/image-preview.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { AppRoutingModule } from './app.routing.module';
     PaginationComponent,
     FormatNamePipe,
     SearchFormComponent,
-    FormatTagPipe
+    FormatTagPipe,
+    FormatValuePipe,
+    ImagePreviewComponent
   ],
   imports: [
     BrowserModule,
