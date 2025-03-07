@@ -10,6 +10,7 @@ export const getEntityPorperties =(entity:string):Array<string>=>{
   //On va stocker les champs que nous avons dans l'entite qui nous a été fournit
   let results: any= []
   let entityClass:any;
+  
   if(entity= "product"){
     //On pourra créer ici un objet products
     entityClass= new Product()

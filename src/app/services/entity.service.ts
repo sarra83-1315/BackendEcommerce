@@ -19,8 +19,16 @@ export class EntityService {
   }
   getDatasByPage(entityName: string, pageNumber:Number=1, pageLimit:Number=5){
     //récupérer les données de product ou contact ou etc.....
-    return this.http.get(environment.apiUrl+entityName+"/by/page?pageNumber="+pageNumber+"&pageLimit="+pageLimit)
-    //et tt ca va retourner un observable qu'on va observer et réagir en fct de valeur qu'on va recevoir
+
+    const route = environment.apiUrl+'/'+entityName+"/by/page?pageNumber="+pageNumber+"&pageLimit="+pageLimit
+
+
+    console.log('route : ', route)
+
+      return this.http.get(route)
+      //et tt ca va retourner un observable qu'on va observer et réagir en fct de valeur qu'on va recevoir
+
+
 
   }
   searchDatasByPage(entityName: string, query:string, pageNumber:Number=1, pageLimit:Number=5){
