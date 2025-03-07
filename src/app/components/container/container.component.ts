@@ -14,7 +14,7 @@ export class ContainerComponent {
   pageName: string=""
   pageNumber:number=1
   pageLimit:number=5
-  datas:any;
+  datas:any = [];
   result:any;
   //les entités qu'on souhaite afficher
   entityNames:Array<string> =[];
@@ -38,7 +38,7 @@ export class ContainerComponent {
  //On va afficher les champs de chaque entité
    //this.entityNamesAll= getEntityPorperties(this.pagePath)
    //Un tableau de chaine de caractères
-  // this.entityNames= [this.entityNamesAll[0]]
+   //this.entityNames= [this.entityNamesAll[0]]
   // console.log({entityNames});
   //C'est un observable
   this.initComp()
@@ -69,6 +69,7 @@ export class ContainerComponent {
 getValue(data: any, name:string){
   //en principe il retourne data[name]
   const index: any= name
+  console.log({name, value:data[name as any],data})
   return data[index]
 
 }
@@ -135,12 +136,12 @@ getDatasByPage(){
       //data c'est des données qu'on va récupérer du serveur
        next:(data:any)=>{
         const {isSuccess, results}= data
-        if(isSuccess&results){
-        this.isLoading= false
-        this.datas= results
-        //les données brut sans les champs
-        this.result= data
-        console.log(data);
+        if(isSuccess){
+            this.isLoading= false
+            this.datas= results
+            console.log(this.datas)
+            //les données brut sans les champs
+            this.result= data
         }else{
           //gestion des erreurs
         }
@@ -149,15 +150,17 @@ getDatasByPage(){
      error: (error:any)=>{
       //gestion des erreurs
       console.log(error);
+      this.isLoading = false
      }
 
     })
   }else{
-     this.entityService.getDatasByPage(this.pagePath, this.pageNumber, this.pageLimit).subscribe({
+     this.entityService.getDatasByPage(this.pagePath, this.pageNumber, this.pageLimit)?.subscribe({
     //data c'est des données qu'on va récupérer du serveur
      next:(data:any)=>{
       const {isSuccess, results}= data
-      if(isSuccess&results){
+      console.log(data)
+      if(isSuccess){
       this.isLoading= false
       this.datas= results
       //les données brut sans les champs
@@ -170,7 +173,8 @@ getDatasByPage(){
    },
    error: (error:any)=>{
     //gestion des erreurs
-    console.log(error);
+    console.log('Error getDataByPage : ', error);
+    this.isLoading = false
    }
 
   })
